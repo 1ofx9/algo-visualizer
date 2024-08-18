@@ -1,45 +1,33 @@
-"use client";
-import SortingHeader from "@/components/sortingpage/header";
-import { SortControls } from "@/components/sortingpage/controls";
-import Footer from "@/components/landingpage/footer";
-import { useSortingAlgorithmContext } from "@/context/visualizer";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { ThemeToggle } from "@/components/providers/theme/theme-toggle";
+import { SelectorMenu } from "@/components/selectormenu";
+import { Button } from "@/components/ui/button";
+import { GithubIcon } from "lucide-react";
 
-export default function SortingPage() {
-  const { arrayToSort } = useSortingAlgorithmContext();
-
+export default function Home() {
   return (
-    <main>
-      <SortingHeader />
-      <SortControls />
-      <div>
-        <div
-          id="content-container"
-          className="flex max-w-[1020px] w-full flex-col lg:px-0 px-4"
-        >
-          <div className="flex w-screen p-5 mx-auto justify-center items-end mb-20 h-[calc(100vh-320px)] md:h-[calc(100vh-240px)] lg:h-[calc(100vh-180px)]">
-            {arrayToSort.map((value, index) => (
-              <TooltipProvider key={index}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <div
-                      className="array-line w-3 lg:w-5 mx-0.5 shadow-lg rounded-md bg-system-bardefault"
-                      style={{ height: `${value}px` }}
-                    ></div>
-                  </TooltipTrigger>
-                  <TooltipContent>{value}</TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            ))}
+    <div className="flex justify-center items-center h-screen">
+      <div className="top-0 flex fixed items-center w-full p-6 md:ml-auto md:justify-end justify-between overflow-hidden">
+        <ThemeToggle />
+      </div>
+      <div className="max-w-3xl space-y-4 flex items-center flex-col justify-center">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold">
+          Algorithm Visualisation
+        </h1>
+        <h3 className="text-base sm:text-xl md:text-2xl font-medium">
+          Visualize. Learn. Master Search Algorithms.
+        </h3>
+        <div className="flex justify-center items-center space-x-4">
+          <SelectorMenu />
+          <Button className="gap-2">
+            Github <GithubIcon className="size-5" />
+          </Button>
+        </div>
+        <div className="flex justify-center items-center gap-2 font-medium">
+          <div>
+            <p>Developed by: Team Cario</p>
           </div>
         </div>
       </div>
-      <Footer />
-    </main>
+    </div>
   );
 }

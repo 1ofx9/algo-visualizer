@@ -28,7 +28,7 @@ export default function SortingPage() {
       <SortControls />
       <div>
         <Alert
-          className="block md:hidden w-[90%] mx-5"
+          className="relative block md:hidden w-[90%] mx-5"
           variant="destructive"
           id="alertbox"
         >

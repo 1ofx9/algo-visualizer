@@ -26,6 +26,7 @@ export default function SortingPage() {
     isAnimationComplete,
     animationSpeed,
     unsortedArray,
+    requiresReset,
   } = useSortingAlgorithmContext();
 
   const handleAlertClose = () => {
@@ -44,6 +45,14 @@ export default function SortingPage() {
       return " Sorting Completed!";
     } else {
       return " Array is not Sorted";
+    }
+  }
+
+  function isarraysorted() {
+    if (isSorting) {
+      return " Please wait... :)";
+    } else {
+      return <span>{arrayString}</span>;
     }
   }
 
@@ -101,11 +110,9 @@ export default function SortingPage() {
                     </p>
                     <h3 className="font-semibold">Sorted Array:</h3>
                     <p>
-                      {isAnimationComplete ? (
-                        <span>{arrayString}</span>
-                      ) : (
-                        "Please start the algorithm to get the sorted array."
-                      )}
+                      {requiresReset
+                        ? isarraysorted()
+                        : "Please start the algorithm to get the sorted array."}
                     </p>
                   </div>
                 </div>

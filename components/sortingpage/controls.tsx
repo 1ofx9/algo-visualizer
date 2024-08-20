@@ -55,7 +55,7 @@ export function SortControls() {
   return (
     <main>
       <div className="flex flex-wrap gap-5 m-5 md:flex-row flex-col items-center justify-around">
-        <div className=" md:w-[600px] min-w-[400px]">
+        <div className=" md:w-[500px] min-w-screen-sm">
           <Input
             type="text"
             placeholder="Enter numbers sperated by commas"

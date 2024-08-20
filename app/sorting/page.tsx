@@ -11,9 +11,22 @@ import {
 } from "@/components/ui/tooltip";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { X } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 
 export default function SortingPage() {
-  const { arrayToSort } = useSortingAlgorithmContext();
+  const {
+    arrayToSort,
+    isSorting,
+    selectedAlgorithm,
+    isAnimationComplete,
+    animationSpeed,
+    unsortedArray,
+  } = useSortingAlgorithmContext();
 
   const handleAlertClose = () => {
     const alertBox = document.getElementById("alertbox");
@@ -21,6 +34,21 @@ export default function SortingPage() {
       alertBox.style.display = "none";
     }
   };
+
+  // const sortedArray = arrayToSort.toSorted((a, b) => a - b).join(",");
+
+  function arrayStatus() {
+    if (isSorting) {
+      return " Sorting...";
+    } else if (isAnimationComplete) {
+      return " Sorting Completed!";
+    } else {
+      return " Array is not Sorted";
+    }
+  }
+
+  const arrayString = ["[ " + arrayToSort.join(" ,") + " ]"];
+  const unsortedArrayString = ["[ " + unsortedArray.join(" ,") + " ]"];
 
   return (
     <main>
@@ -43,11 +71,54 @@ export default function SortingPage() {
             </p>
           </AlertDescription>
         </Alert>
+        <div id="array-display-container">
+          <div className="w-screen-sm m-5 p-5">
+            <Card>
+              <CardHeader></CardHeader>
+              <CardContent>
+                <div className="flex flex-col">
+                  <div className="flex gap-1">
+                    <p className="font-semibold">Algorithm:</p>
+                    {selectedAlgorithm.charAt(0).toUpperCase() +
+                      selectedAlgorithm.slice(1)}
+                  </div>
+                  <div className="flex gap-1">
+                    <p className="font-semibold">Status:</p>
+                    {arrayStatus()}
+                  </div>
+                  <div className="flex gap-1">
+                    <p className="font-semibold">Current Speed:</p>
+                    {animationSpeed}
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <h3 className="font-semibold">Given Array:</h3>
+                    <p>
+                      {isAnimationComplete ? (
+                        <span>{unsortedArrayString}</span>
+                      ) : (
+                        <span>{arrayString}</span>
+                      )}
+                    </p>
+                    <h3 className="font-semibold">Sorted Array:</h3>
+                    <p>
+                      {isAnimationComplete ? (
+                        <span>{arrayString}</span>
+                      ) : (
+                        "Please start the algorithm to get the sorted array."
+                      )}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+              <CardFooter></CardFooter>
+            </Card>
+          </div>
+        </div>
         <div
           id="content-container"
-          className="flex max-w-[1020px] w-full flex-col lg:px-0 px-4"
+          className="flex max-w-screen-sm w-full flex-col lg:px-0 px-4 bottom-5"
         >
-          <div className="flex w-screen p-5 mx-auto justify-center items-end mb-20 h-[calc(100vh-320px)] md:h-[calc(100vh-240px)] lg:h-[calc(100vh-180px)]">
+          <div className="flex w-screen p-5 mx-auto justify-center items-end mb-20 ">
             {arrayToSort.map((value, index) => (
               <TooltipProvider key={index}>
                 <Tooltip>

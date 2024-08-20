@@ -16,6 +16,8 @@ import {
 interface SortingAlgorithmContextType {
   arrayToSort: number[];
   setArrayToSort: (array: number[]) => void;
+  unsortedArray: number[];
+  setunsortedArray: (array: number[]) => void;
   selectedAlgorithm: SortingAlgorithmType;
   setSelectedAlgorithm: (algorithm: SortingAlgorithmType) => void;
   isSorting: boolean;
@@ -39,6 +41,7 @@ export const SortingAlgorithmProvider = ({
   children: ReactNode;
 }) => {
   const [arrayToSort, setArrayToSort] = useState<number[]>([]);
+  const [unsortedArray, setunsortedArray] = useState<number[]>([]);
   const [selectedAlgorithm, setSelectedAlgorithm] =
     useState<SortingAlgorithmType>("bubble");
   const [isSorting, setIsSorting] = useState<boolean>(false);
@@ -63,7 +66,7 @@ export const SortingAlgorithmProvider = ({
     const contentContainerWidth = contentContainer.clientWidth;
 
     const tempArray: number[] = [];
-    const numLines = contentContainerWidth / 8;
+    const numLines = contentContainerWidth / 14;
     const containerHeight = window.innerHeight;
     const maxLineHeight = Math.max(containerHeight - 420, 100);
     for (let i = 0; i < numLines; i++) {
@@ -139,6 +142,8 @@ export const SortingAlgorithmProvider = ({
         }
       }, index * inverseSpeed);
     });
+    const sortedArray = arrayToSort.toSorted((a, b) => a - b);
+    setunsortedArray(arrayToSort);
 
     const finalTimeout = animations.length * inverseSpeed;
     setTimeout(() => {
@@ -154,6 +159,10 @@ export const SortingAlgorithmProvider = ({
         });
         setIsSorting(false);
         setIsAnimationComplete(true);
+        setArrayToSort(sortedArray);
+        console.log("Array to sort", arrayToSort);
+        console.log("Sorted Array", sortedArray);
+        console.log("Unsorted Array", unsortedArray);
       }, 1000);
     }, finalTimeout);
   };
@@ -172,6 +181,8 @@ export const SortingAlgorithmProvider = ({
     runAnimation,
     requiresReset,
     setIsAnimationComplete,
+    unsortedArray,
+    setunsortedArray,
   };
 
   return (

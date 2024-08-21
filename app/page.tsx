@@ -1,3 +1,4 @@
+import GithubPage from "@/components/github-page";
 import { ThemeToggle } from "@/components/providers/theme/theme-toggle";
 import { SelectorMenu } from "@/components/selectormenu";
 import { Button } from "@/components/ui/button";
@@ -18,9 +19,7 @@ export default function Home() {
         </h3>
         <div className="flex justify-center items-center space-x-4">
           <SelectorMenu />
-          <Button className="gap-2">
-            Github <GithubIcon className="size-5" />
-          </Button>
+          <GithubPage />
         </div>
         <div className="flex justify-center items-center gap-2 font-medium">
           <div>

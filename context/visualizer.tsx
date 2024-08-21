@@ -5,6 +5,7 @@ import {
   MAX_ANIMATION_SPEED,
 } from "@/lib/config";
 import { AnimationArrayType, SortingAlgorithmType } from "@/lib/types";
+import { get } from "http";
 import {
   ReactNode,
   useContext,
@@ -61,12 +62,27 @@ export const SortingAlgorithmProvider = ({
   }, []);
 
   const resetArrayAndAnimation = () => {
+    const getDeviceValue = (): number => {
+      const deviceWidth = window.innerWidth;
+
+      if (deviceWidth >= 1024) {
+        // Desktop
+        return 14;
+      } else if (deviceWidth >= 768) {
+        // Tablet
+        return 24;
+      } else {
+        // Mobile
+        return 32;
+      }
+    };
+
     const contentContainer = document.getElementById("content-container");
     if (!contentContainer) return;
     const contentContainerWidth = contentContainer.clientWidth;
 
     const tempArray: number[] = [];
-    const numLines = contentContainerWidth / 14;
+    const numLines = contentContainerWidth / getDeviceValue();
     const containerHeight = window.innerHeight;
     const maxLineHeight = Math.max(containerHeight - 420, 100);
     for (let i = 0; i < numLines; i++) {
@@ -160,9 +176,9 @@ export const SortingAlgorithmProvider = ({
         setIsSorting(false);
         setIsAnimationComplete(true);
         setArrayToSort(sortedArray);
-        console.log("Array to sort", arrayToSort);
-        console.log("Sorted Array", sortedArray);
-        console.log("Unsorted Array", unsortedArray);
+        // console.log("Array to sort", arrayToSort);
+        // console.log("Sorted Array", sortedArray);
+        // console.log("Unsorted Array", unsortedArray);
       }, 1000);
     }, finalTimeout);
   };

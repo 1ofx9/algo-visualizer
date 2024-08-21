@@ -1,4 +1,6 @@
 "use client";
+
+import React, { useRef, useState, useEffect, RefObject } from "react";
 import SortingHeader from "@/components/sortingpage/header";
 import { SortControls } from "@/components/sortingpage/controls";
 import Footer from "@/components/footer";
@@ -36,8 +38,6 @@ export default function SortingPage() {
     }
   };
 
-  // const sortedArray = arrayToSort.toSorted((a, b) => a - b).join(",");
-
   function arrayStatus() {
     if (isSorting) {
       return " Sorting...";
@@ -58,6 +58,43 @@ export default function SortingPage() {
 
   const arrayString = ["[ " + arrayToSort.join(" ,") + " ]"];
   const unsortedArrayString = ["[ " + unsortedArray.join(" ,") + " ]"];
+
+  const divRefs = useRef<(RefObject<HTMLDivElement> | null)[]>([]);
+  const [divHeights, setDivHeights] = useState<number[]>([]);
+
+  if (divRefs.current.length !== arrayToSort.length) {
+    divRefs.current = arrayToSort.map(() => React.createRef<HTMLDivElement>());
+  }
+
+  useEffect(() => {
+    const updateHeight = (index: number, height: number) => {
+      setDivHeights((prevHeights) => {
+        const newHeights = [...prevHeights];
+        newHeights[index] = height;
+        return newHeights;
+      });
+    };
+
+    divRefs.current.forEach((ref, index) => {
+      if (ref && ref.current) {
+        updateHeight(index, ref.current.offsetHeight);
+
+        const observer = new MutationObserver(() => {
+          if (ref.current) {
+            updateHeight(index, ref.current.offsetHeight);
+          }
+        });
+
+        observer.observe(ref.current, {
+          attributes: true,
+          attributeFilter: ["style"],
+          subtree: false,
+        });
+
+        return () => observer.disconnect();
+      }
+    });
+  }, [arrayToSort]);
 
   return (
     <main>
@@ -89,7 +126,8 @@ export default function SortingPage() {
                   <div className="flex gap-1">
                     <p className="font-semibold">Algorithm:</p>
                     {selectedAlgorithm.charAt(0).toUpperCase() +
-                      selectedAlgorithm.slice(1)}
+                      selectedAlgorithm.slice(1) +
+                      " Sort"}
                   </div>
                   <div className="flex gap-1">
                     <p className="font-semibold">Status:</p>
@@ -131,11 +169,26 @@ export default function SortingPage() {
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <div
-                      className="array-line w-3 lg:w-5 mx-0.5 shadow-lg rounded-md bg-system-bardefault"
+                      ref={divRefs.current[index]}
+                      className="array-line w-fit lg:w-10 text-center mx-0.5 shadow-lg rounded-md bg-system-bardefault"
                       style={{ height: `${value}px` }}
-                    ></div>
+                    >
+                      <span className="text-secondary py-1">
+                        {divHeights[index] ? (
+                          <p>{divHeights[index]}</p>
+                        ) : (
+                          "Loading..."
+                        )}
+                      </span>
+                    </div>
                   </TooltipTrigger>
-                  <TooltipContent>{value}</TooltipContent>
+                  <TooltipContent>
+                    {divHeights[index] ? (
+                      <p>{divHeights[index]}</p>
+                    ) : (
+                      "Loading..."
+                    )}
+                  </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             ))}

@@ -163,7 +163,7 @@ export default function SortingPage() {
           id="content-container"
           className="flex max-w-screen-sm w-full flex-col lg:px-0 px-4 bottom-5"
         >
-          <div className="flex w-screen p-5 mx-auto justify-center items-end mb-20 ">
+          <div className="flex w-screen p-5 mx-auto justify-center items-end mb-20">
             {arrayToSort.map((value, index) => (
               <TooltipProvider key={index}>
                 <Tooltip>

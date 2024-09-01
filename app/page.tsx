@@ -1,8 +1,6 @@
 import GithubPage from "@/components/github-page";
 import { ThemeToggle } from "@/components/providers/theme/theme-toggle";
 import { SelectorMenu } from "@/components/selectormenu";
-import { Button } from "@/components/ui/button";
-import { GithubIcon } from "lucide-react";
 
 export default function Home() {
   return (

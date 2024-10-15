@@ -1,4 +1,4 @@
-import { AnimationArrayType } from "../types";
+import type { AnimationArrayType } from "../types";
 
 // Function to heapify a subtree rooted at index i
 function heapify(

@@ -1,4 +1,4 @@
-import { AnimationArrayType } from "../types";
+import type { AnimationArrayType } from "../types";
 
 function partition(
   array: number[],

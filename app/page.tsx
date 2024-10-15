@@ -1,6 +1,7 @@
 import GithubPage from "@/components/github-page";
 import { ThemeToggle } from "@/components/providers/theme/theme-toggle";
-import { SelectorMenu } from "@/components/selectormenu";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -16,7 +17,8 @@ export default function Home() {
           Visualize. Learn. Master Search Algorithms.
         </h3>
         <div className="flex justify-center items-center space-x-4">
-          <SelectorMenu />
+          {/* <SelectorMenu /> use to add more navs in the future */} 
+          <Link href="/sorting"><Button variant="secondary">Sorting Algorithms</Button></Link>
           <GithubPage />
         </div>
         <div className="flex justify-center items-center gap-2 font-medium">

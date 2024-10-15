@@ -5,7 +5,7 @@ import { generateSelectionSortAnimationArray } from "./algorithms/selectionSort"
 import { generateInsertionSortAnimationArray } from "./algorithms/insertionSort";
 import { generateHeapSortAnimationArray } from "./algorithms/heapSort";
 
-import { SortingAlgorithmType } from "./types";
+import type { SortingAlgorithmType } from "./types";
 
 // Animation speed
 export const MNI_ANIMATION_SPEED = 1;

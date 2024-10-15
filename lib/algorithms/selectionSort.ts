@@ -1,4 +1,4 @@
-import { AnimationArrayType } from "../types";
+import type { AnimationArrayType } from "../types";
 
 function runSelectionSort(array: number[], animations: AnimationArrayType) {
   for (let i = 0; i < array.length - 1; i++) {

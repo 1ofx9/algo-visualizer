@@ -4,8 +4,9 @@ import {
   generateRandomNumberFromInterval,
   MAX_ANIMATION_SPEED,
 } from "@/lib/config";
-import { AnimationArrayType, SortingAlgorithmType } from "@/lib/types";
-import { get } from "http";
+
+import type { AnimationArrayType, SortingAlgorithmType } from "@/lib/types";
+
 import {
   ReactNode,
   useContext,

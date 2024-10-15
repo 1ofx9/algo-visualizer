@@ -75,6 +75,10 @@
 .change-line-color {
   background: theme("colors.system.barchange");
 }
+.bar-pivot-color {
+  background: theme("colors.system.barpivot");
+}
+
 @keyframes pulse {
   0%,
   100% {

@@ -21,6 +21,7 @@ const config = {
       system: {
         bardefault: "hsl(var(--primary))",
         barchange: "#00ff80",
+        barpivot: "#fcd34d",
       },
     },
     extend: {

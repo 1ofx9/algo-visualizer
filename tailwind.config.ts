@@ -23,7 +23,7 @@ const config = {
         // rosepine moon variant
         barchange: "#eb6f92",
         barpivot: "#f6c177",
-        barsorted: "#9ccfd8",
+        barsorted: "#3e9f90",
       },
     },
     extend: {

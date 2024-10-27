@@ -17,8 +17,10 @@ export default function Home() {
           Visualize. Learn. Master Search Algorithms.
         </h3>
         <div className="flex justify-center items-center space-x-4">
-          {/* <SelectorMenu /> use to add more navs in the future */} 
-          <Link href="/sorting"><Button variant="secondary">Sorting Algorithms</Button></Link>
+          {/* <SelectorMenu /> use to add more navs in the future */}
+          <Link href="/sorting">
+            <Button variant="secondary">Sorting Algorithms</Button>
+          </Link>
           <GithubPage />
         </div>
         <div className="flex justify-center items-center gap-2 font-medium">

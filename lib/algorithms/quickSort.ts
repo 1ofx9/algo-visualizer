@@ -5,41 +5,56 @@ function partition(
   begin: number,
   finish: number,
   animations: AnimationArrayType,
+  setPivotIndex: (index: number | null) => void,
 ) {
-  let i = begin;
-  let j = finish + 1;
-  const condition = true;
   const pivot = array[begin];
-  while (condition) {
-    while (array[++i] <= pivot) {
-      if (i === finish) break;
+  setPivotIndex(begin);
+  animations.push([[begin], false, true]); // Mark initial pivot
+
+  let i = begin + 1;
+  let j = finish;
+
+  while (i <= j) {
+    while (i <= finish && array[i] < pivot) {
       animations.push([[i], false]);
+      i++;
     }
-    while (array[--j] >= pivot) {
-      if (j === begin) break;
+    while (j > begin && array[j] >= pivot) {
       animations.push([[j], false]);
+      j--;
     }
-    if (j <= i) break;
-    animations.push([[i, array[j]], true]);
-    animations.push([[j, array[i]], true]);
-    [array[i], array[j]] = [array[j], array[i]];
+    if (i < j) {
+      animations.push([[i, array[j]], true]);
+      animations.push([[j, array[i]], true]);
+      [array[i], array[j]] = [array[j], array[i]];
+    }
   }
+
   animations.push([[begin, array[j]], true]);
   animations.push([[j, array[begin]], true]);
   [array[begin], array[j]] = [array[j], array[begin]];
+  setPivotIndex(j);
+  animations.push([[j], false, true]); // Mark new pivot position
   return j;
 }
 
-function runQuickort(
+function runQuickSort(
   array: number[],
   begin: number,
   finish: number,
   animations: AnimationArrayType,
+  setPivotIndex: (index: number | null) => void,
 ) {
   if (begin < finish) {
-    const part = partition(array, begin, finish, animations);
-    runQuickort(array, begin, part - 1, animations);
-    runQuickort(array, part + 1, finish, animations);
+    const partitionIndex = partition(
+      array,
+      begin,
+      finish,
+      animations,
+      setPivotIndex,
+    );
+    runQuickSort(array, begin, partitionIndex - 1, animations, setPivotIndex);
+    runQuickSort(array, partitionIndex + 1, finish, animations, setPivotIndex);
   }
 }
 
@@ -47,12 +62,13 @@ export function generateQuickSortAnimationArray(
   isSorting: boolean,
   array: number[],
   runAnimation: (animations: AnimationArrayType) => void,
+  setPivotIndex: (index: number | null) => void,
 ) {
   if (isSorting) return;
   if (array.length <= 1) return array;
 
   const animations: AnimationArrayType = [];
   const auxiliaryArray = array.slice();
-  runQuickort(auxiliaryArray, 0, array.length - 1, animations);
+  runQuickSort(auxiliaryArray, 0, array.length - 1, animations, setPivotIndex);
   runAnimation(animations);
 }

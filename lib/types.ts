@@ -25,4 +25,4 @@ export type SelectOptionsType = {
   value: string;
 };
 
-export type AnimationArrayType = [number[], boolean][];
+export type AnimationArrayType = [number[], boolean, boolean?][];

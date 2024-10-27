@@ -29,6 +29,7 @@ export default function SortingPage() {
     animationSpeed,
     unsortedArray,
     requiresReset,
+    pivotIndex,
   } = useSortingAlgorithmContext();
 
   const handleAlertClose = () => {
@@ -170,7 +171,11 @@ export default function SortingPage() {
                   <TooltipTrigger asChild>
                     <div
                       ref={divRefs.current[index]}
-                      className="array-line w-fit lg:w-10 text-center mx-0.5 shadow-lg rounded-md bg-system-bardefault"
+                      className={`array-line w-fit lg:w-10 text-center mx-0.5 shadow-lg rounded-md ${
+                        index === pivotIndex
+                          ? "bar-pivot-color"
+                          : "bg-system-bardefault"
+                      }`}
                       style={{ height: `${value}px` }}
                     >
                       <span className="text-secondary py-1">

@@ -136,7 +136,17 @@ export default function SortingPage() {
                   </div>
                   <div className="flex gap-1">
                     <p className="font-semibold">Current Speed:</p>
-                    {animationSpeed}
+                    {(() => {
+                      const speed =
+                        animationSpeed === 0
+                          ? `Instant (${animationSpeed})`
+                          : animationSpeed >= 1 && animationSpeed <= 15
+                            ? `Slow (${animationSpeed})`
+                            : animationSpeed >= 16 && animationSpeed <= 30
+                              ? `Medium (${animationSpeed})`
+                              : `Fast (${animationSpeed})`;
+                      return speed;
+                    })()}
                   </div>
                   <div className="flex flex-col gap-1">
                     <h3 className="font-semibold">Given Array:</h3>

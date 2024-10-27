@@ -1,4 +1,4 @@
-import { MAX_ANIMATION_SPEED, MNI_ANIMATION_SPEED } from "@/lib/config";
+import { MAX_ANIMATION_SPEED, MIN_ANIMATION_SPEED } from "@/lib/config";
 import { Input } from "../ui/input";
 import {
   Tooltip,
@@ -9,9 +9,9 @@ import {
 import { useSortingAlgorithmContext } from "@/context/visualizer";
 
 export const Slider = ({
-  min = MNI_ANIMATION_SPEED,
+  min = MIN_ANIMATION_SPEED,
   max = MAX_ANIMATION_SPEED,
-  step = 10,
+  step = 1,
   value,
   handleChange,
   isDisabled = false,

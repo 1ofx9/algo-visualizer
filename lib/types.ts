@@ -18,8 +18,6 @@ export type SortingAlgorithmsData = {
   [key in SortingAlgorithmType]: AlgorithmInfo;
 };
 
-export type AnimateSpeedType = "slow" | "medium" | "fast" | "lighning";
-
 export type SelectOptionsType = {
   label: string;
   value: string;

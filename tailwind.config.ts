@@ -19,7 +19,7 @@ const config = {
     },
     colors: {
       system: {
-        bardefault: "hsl(var(--primary))",
+        bardefault: "hsl(var(--bar-default))",
         // rosepine moon variant
         barchange: "#eb6f92",
         barpivot: "#f6c177",

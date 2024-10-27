@@ -33,6 +33,7 @@ interface SortingAlgorithmContextType {
   requiresReset: boolean;
   setPivotIndex: (index: number | null) => void;
   pivotIndex: number | null;
+  setRequiresReset: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const SortingAlgorithmContext = createContext<
@@ -96,6 +97,7 @@ export const SortingAlgorithmProvider = ({
     setArrayToSort(tempArray);
     setIsSorting(false);
     setIsAnimationComplete(false);
+    setRequiresReset(false);
 
     const highestId = window.setTimeout(() => {
       for (let i = highestId; i >= 0; i--) {

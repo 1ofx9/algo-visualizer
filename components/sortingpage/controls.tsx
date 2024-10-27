@@ -28,6 +28,7 @@ export function SortControls() {
     resetArrayAndAnimation,
     runAnimation,
     setPivotIndex,
+    setRequiresReset,
   } = useSortingAlgorithmContext();
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -47,6 +48,7 @@ export function SortControls() {
       runAnimation,
       setPivotIndex,
     );
+    setRequiresReset(true);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

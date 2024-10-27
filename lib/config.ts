@@ -8,8 +8,8 @@ import { generateHeapSortAnimationArray } from "./algorithms/heapSort";
 import type { AnimationArrayType, SortingAlgorithmType } from "./types";
 
 // Animation speed
-export const MNI_ANIMATION_SPEED = 1;
-export const MAX_ANIMATION_SPEED = 100;
+export const MIN_ANIMATION_SPEED = 0;
+export const MAX_ANIMATION_SPEED = 50;
 
 export function generateRandomNumberFromInterval(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min);

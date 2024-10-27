@@ -5,7 +5,7 @@ import { generateSelectionSortAnimationArray } from "./algorithms/selectionSort"
 import { generateInsertionSortAnimationArray } from "./algorithms/insertionSort";
 import { generateHeapSortAnimationArray } from "./algorithms/heapSort";
 
-import type { SortingAlgorithmType } from "./types";
+import type { AnimationArrayType, SortingAlgorithmType } from "./types";
 
 // Animation speed
 export const MNI_ANIMATION_SPEED = 1;
@@ -28,14 +28,20 @@ export function generateAnimationArray(
   selectedAlgorithm: SortingAlgorithmType,
   isSorting: boolean,
   array: number[],
-  runAnimation: (animations: [number[], boolean][]) => void,
+  runAnimation: (animations: AnimationArrayType) => void,
+  setPivotIndex: (index: number | null) => void,
 ) {
   switch (selectedAlgorithm) {
     case "bubble":
       generateBubbleSortAnimationArray(isSorting, array, runAnimation);
       break;
     case "quick":
-      generateQuickSortAnimationArray(isSorting, array, runAnimation);
+      generateQuickSortAnimationArray(
+        isSorting,
+        array,
+        runAnimation,
+        setPivotIndex,
+      );
       break;
     case "merge":
       generateMergeSortAnimationArray(isSorting, array, runAnimation);

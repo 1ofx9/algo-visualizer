@@ -78,6 +78,9 @@
 .bar-pivot-color {
   background: theme("colors.system.barpivot");
 }
+.sorted-line-color {
+  background: theme("colors.system.barsorted");
+}
 
 @keyframes pulse {
   0%,

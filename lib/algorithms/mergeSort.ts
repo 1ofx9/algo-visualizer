@@ -54,7 +54,7 @@ function runMergeSort(array: number[]) {
       merge(array, begin, mergemiddle, finish, animations);
     }
   }
-  return {animations, mergemiddle};
+  return { animations, mergemiddle };
 }
 
 export { mergemiddle };

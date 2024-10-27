@@ -31,6 +31,8 @@ interface SortingAlgorithmContextType {
   resetArrayAndAnimation: () => void;
   runAnimation: (animations: AnimationArrayType) => void;
   requiresReset: boolean;
+  setPivotIndex: (index: number | null) => void;
+  pivotIndex: number | null;
 }
 
 const SortingAlgorithmContext = createContext<
@@ -51,7 +53,8 @@ export const SortingAlgorithmProvider = ({
     useState<boolean>(false);
   const [animationSpeed, setAnimationSpeed] =
     useState<number>(MAX_ANIMATION_SPEED);
-  const requiresReset = isAnimationComplete || isSorting;
+  const [pivotIndex, setPivotIndex] = useState<number | null>(null);
+  const [requiresReset, setRequiresReset] = useState<boolean>(false);
 
   useEffect(() => {
     resetArrayAndAnimation();
@@ -121,10 +124,14 @@ export const SortingAlgorithmProvider = ({
       indexes: number[],
       addClassName: string,
       removeClassName: string,
+      isPivot = false,
     ) => {
       indexes.forEach((index) => {
         arrLines[index].classList.add(addClassName);
         arrLines[index].classList.remove(removeClassName);
+        if (isPivot) {
+          setPivotIndex(index);
+        }
       });
     };
 
@@ -137,49 +144,75 @@ export const SortingAlgorithmProvider = ({
 
     animations.forEach((animation, index) => {
       setTimeout(() => {
-        const [lineIndexes, isSwap] = animation;
+        const [lineIndexes, isSwap, isPivot = false] = animation;
         if (!isSwap) {
+          if (isPivot) {
+            updateClassList(
+              lineIndexes,
+              "bar-pivot-color",
+              "change-line-color",
+              isPivot,
+            );
+          } else {
+            updateClassList(
+              lineIndexes,
+              "change-line-color",
+              "default-line-color",
+            );
+            setTimeout(
+              () =>
+                updateClassList(
+                  lineIndexes,
+                  "default-line-color",
+                  "change-line-color",
+                ),
+              inverseSpeed / 2,
+            );
+          }
+        } else {
+          const [lineIndex, newHeight] = lineIndexes;
           updateClassList(
-            lineIndexes,
+            [lineIndex],
             "change-line-color",
             "default-line-color",
           );
+          updateHeightValue(lineIndex, newHeight);
           setTimeout(
             () =>
               updateClassList(
-                lineIndexes,
+                [lineIndex],
                 "default-line-color",
                 "change-line-color",
               ),
-            inverseSpeed,
+            inverseSpeed / 2,
           );
-        } else {
-          const [lineIndex, newHeight] = lineIndexes;
-          updateHeightValue(lineIndex, newHeight);
         }
       }, index * inverseSpeed);
     });
+
     const sortedArray = arrayToSort.toSorted((a, b) => a - b);
     setunsortedArray(arrayToSort);
 
     const finalTimeout = animations.length * inverseSpeed;
     setTimeout(() => {
       Array.from(arrLines).forEach((line) => {
-        line.classList.add("pulse-animation", "change-line-color");
-        line.classList.remove("default-line-color");
+        line.classList.add("pulse-animation", "sorted-line-color");
+        line.classList.remove(
+          "default-line-color",
+          "bar-pivot-color",
+          "change-line-color",
+        );
       });
 
       setTimeout(() => {
         Array.from(arrLines).forEach((line) => {
-          line.classList.remove("pulse-animation", "change-line-color");
+          line.classList.remove("pulse-animation", "sorted-line-color");
           line.classList.add("default-line-color");
         });
         setIsSorting(false);
         setIsAnimationComplete(true);
         setArrayToSort(sortedArray);
-        // console.log("Array to sort", arrayToSort);
-        // console.log("Sorted Array", sortedArray);
-        // console.log("Unsorted Array", unsortedArray);
+        setPivotIndex(null);
       }, 1000);
     }, finalTimeout);
   };
@@ -194,12 +227,15 @@ export const SortingAlgorithmProvider = ({
     animationSpeed,
     setAnimationSpeed,
     isAnimationComplete,
+    setIsAnimationComplete,
     resetArrayAndAnimation,
     runAnimation,
     requiresReset,
-    setIsAnimationComplete,
+    setRequiresReset,
     unsortedArray,
     setunsortedArray,
+    pivotIndex,
+    setPivotIndex,
   };
 
   return (

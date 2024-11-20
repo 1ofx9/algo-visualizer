@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect, RefObject } from "react";
+import React, { useRef, useState, useEffect, type RefObject } from "react";
 import SortingHeader from "@/components/sortingpage/header";
 import { SortControls } from "@/components/sortingpage/controls";
 import Footer from "@/components/footer";
@@ -42,23 +42,21 @@ export default function SortingPage() {
   function arrayStatus() {
     if (isSorting) {
       return " Sorting...";
-    } else if (isAnimationComplete) {
+    }if (isAnimationComplete) {
       return " Sorting Completed!";
-    } else {
-      return " Array is not Sorted";
     }
+      return " Array is not Sorted";
   }
 
   function isarraysorted() {
     if (isSorting) {
       return " Please wait... :)";
-    } else {
-      return <span>{arrayString}</span>;
     }
+      return <span>{arrayString}</span>;
   }
 
-  const arrayString = ["[ " + arrayToSort.join(" ,") + " ]"];
-  const unsortedArrayString = ["[ " + unsortedArray.join(" ,") + " ]"];
+  const arrayString = [`[ ${arrayToSort.join(" ,")} ]`];
+  const unsortedArrayString = [`[ ${unsortedArray.join(" ,")} ]`];
 
   const divRefs = useRef<(RefObject<HTMLDivElement> | null)[]>([]);
   const [divHeights, setDivHeights] = useState<number[]>([]);
@@ -77,7 +75,7 @@ export default function SortingPage() {
     };
 
     divRefs.current.forEach((ref, index) => {
-      if (ref && ref.current) {
+      if (ref?.current) {
         updateHeight(index, ref.current.offsetHeight);
 
         const observer = new MutationObserver(() => {
@@ -121,14 +119,13 @@ export default function SortingPage() {
         <div id="array-display-container">
           <div className="w-screen-sm m-5 p-5">
             <Card>
-              <CardHeader></CardHeader>
+              <CardHeader />
               <CardContent>
                 <div className="flex flex-col">
                   <div className="flex gap-1">
                     <p className="font-semibold">Algorithm:</p>
-                    {selectedAlgorithm.charAt(0).toUpperCase() +
-                      selectedAlgorithm.slice(1) +
-                      " Sort"}
+                    {`${selectedAlgorithm.charAt(0).toUpperCase() +
+                      selectedAlgorithm.slice(1)} Sort`}
                   </div>
                   <div className="flex gap-1">
                     <p className="font-semibold">Status:</p>
@@ -139,12 +136,12 @@ export default function SortingPage() {
                     {(() => {
                       const speed =
                         animationSpeed === 0
-                          ? `Instant (${animationSpeed})`
+                          ? <p className="text-system-barchange">Instant ⚡ ({animationSpeed})</p>
                           : animationSpeed >= 1 && animationSpeed <= 15
-                            ? `Slow (${animationSpeed})`
+                            ? `Slow 🐌 (${animationSpeed})`
                             : animationSpeed >= 16 && animationSpeed <= 30
-                              ? `Medium (${animationSpeed})`
-                              : `Fast (${animationSpeed})`;
+                              ? `Medium 🏃‍♂️‍➡️ (${animationSpeed})`
+                              : `Fast 🏎️ (${animationSpeed})`;
                       return speed;
                     })()}
                   </div>
@@ -166,7 +163,7 @@ export default function SortingPage() {
                   </div>
                 </div>
               </CardContent>
-              <CardFooter></CardFooter>
+              <CardFooter />
             </Card>
           </div>
         </div>

@@ -41,11 +41,11 @@ export default function SortingPage() {
 
   function arrayStatus() {
     if (isSorting) {
-      return <p className="text-system-barpivot">Sorting... '~'</p>;
+      return <p className="text-system-barpivot">Sorting... &apos;~&apos;</p>;
     }if (isAnimationComplete) {
       return <p className="text-system-barsorted">Sorting Completed! :)</p>;
     }
-      return <p className="text-system-barchange">Array is not Sorted :'(</p>;
+      return <p className="text-system-barchange">Array is not Sorted :&apos;(</p>;
   }
 
   function isarraysorted() {

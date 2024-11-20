@@ -41,11 +41,11 @@ export default function SortingPage() {
 
   function arrayStatus() {
     if (isSorting) {
-      return " Sorting...";
+      return <p className="text-system-barpivot">Sorting... '~'</p>;
     }if (isAnimationComplete) {
-      return " Sorting Completed!";
+      return <p className="text-system-barsorted">Sorting Completed! :)</p>;
     }
-      return " Array is not Sorted";
+      return <p className="text-system-barchange">Array is not Sorted :'(</p>;
   }
 
   function isarraysorted() {
@@ -124,8 +124,7 @@ export default function SortingPage() {
                 <div className="flex flex-col">
                   <div className="flex gap-1">
                     <p className="font-semibold">Algorithm:</p>
-                    {`${selectedAlgorithm.charAt(0).toUpperCase() +
-                      selectedAlgorithm.slice(1)} Sort`}
+                    <span>{`${selectedAlgorithm.charAt(0).toUpperCase() + selectedAlgorithm.slice(1)} Sort`}</span>
                   </div>
                   <div className="flex gap-1">
                     <p className="font-semibold">Status:</p>
@@ -169,9 +168,9 @@ export default function SortingPage() {
         </div>
         <div
           id="content-container"
-          className="flex max-w-screen-sm w-full flex-col lg:px-0 px-4 bottom-5"
+          className="flex flex-col lg:px-0 px-4 max-w-screen-sm w-full"
         >
-          <div className="flex w-screen p-5 mx-auto justify-center items-end mb-20">
+          <div className="flex w-screen p-5 mx-auto justify-center items-end">
             {arrayToSort.map((value, index) => (
               <TooltipProvider key={index}>
                 <Tooltip>

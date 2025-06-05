@@ -14,7 +14,7 @@ export default function Home() {
           Algorithm Visualisation
         </h1>
         <h3 className="text-base sm:text-xl md:text-2xl font-medium">
-          Visualize. Learn. Master Search Algorithms.
+          Visualize. Learn. Master Algorithms.
         </h3>
         <div className="flex justify-center items-center space-x-4">
           {/* <SelectorMenu /> use to add more navs in the future */}

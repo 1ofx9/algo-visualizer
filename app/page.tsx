@@ -25,7 +25,7 @@ export default function Home() {
         </div>
         <div className="flex justify-center items-center gap-2 font-medium">
           <div>
-            <p>Developed by: Team Cario</p>
+            <p>Developed by: 1ofx9</p>
           </div>
         </div>
       </div>

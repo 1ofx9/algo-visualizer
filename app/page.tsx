@@ -17,16 +17,11 @@ export default function Home() {
           Visualize. Learn. Master Algorithms.
         </h3>
         <div className="flex justify-center items-center space-x-4">
-          {/* <SelectorMenu /> use to add more navs in the future */}
+          {/* <SelectorMenu /> "use this to add selector menu for multiple algorithms" */}
           <Link href="/sorting">
             <Button variant="secondary">Sorting Algorithms</Button>
           </Link>
           <GithubPage />
-        </div>
-        <div className="flex justify-center items-center gap-2 font-medium">
-          <div>
-            <p>Developed by: 1ofx9</p>
-          </div>
         </div>
       </div>
     </div>

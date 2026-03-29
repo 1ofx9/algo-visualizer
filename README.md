@@ -9,7 +9,7 @@ Live on [subs-algo-visualizer.vercel.app](https://subs-algo-visualizer.vercel.ap
 <br>
 Or download Source code directly form [here](https://github.com/1ofx9/algo-visualizer/archive/refs/heads/main.zip).
 
-### How it use?
+### How to use?
 ![homepage](/public/assets/subs-algo-visualizer.png)
 
 Navigate to the algorithm sorting page.

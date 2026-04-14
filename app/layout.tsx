@@ -1,29 +1,29 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import { ThemeProvider } from "@/components/providers/theme/theme-provider";
 import { SortingAlgorithmProvider } from "@/context/visualizer";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Algorithm Visualizer",
-  description: "Visualize algorithms in action",
+	title: "Algorithm Visualizer",
+	description: "Visualize algorithms in action",
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <Script id="viewport-adjustment" strategy="beforeInteractive">
-          {`
+	return (
+		<html lang="en" suppressHydrationWarning>
+			<head>
+				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+				<Script id="viewport-adjustment" strategy="beforeInteractive">
+					{`
             function getCookie(name) {
               const value = "; " + document.cookie;
               const parts = value.split("; " + name + "=");
@@ -37,14 +37,14 @@ export default function RootLayout({
               viewport.setAttribute('content', 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no');
             }
           `}
-        </Script>
-      </head>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <SortingAlgorithmProvider>{children}</SortingAlgorithmProvider>
-          <SpeedInsights />
-        </ThemeProvider>
-      </body>
-    </html>
-  );
+				</Script>
+			</head>
+			<body className={inter.className}>
+				<ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+					<SortingAlgorithmProvider>{children}</SortingAlgorithmProvider>
+					<SpeedInsights />
+				</ThemeProvider>
+			</body>
+		</html>
+	);
 }

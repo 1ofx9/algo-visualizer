@@ -1,9 +1,9 @@
 import { generateBubbleSortAnimationArray } from "./algorithms/bubbleSort";
+import { generateHeapSortAnimationArray } from "./algorithms/heapSort";
+import { generateInsertionSortAnimationArray } from "./algorithms/insertionSort";
 import { generateMergeSortAnimationArray } from "./algorithms/mergeSort";
 import { generateQuickSortAnimationArray } from "./algorithms/quickSort";
 import { generateSelectionSortAnimationArray } from "./algorithms/selectionSort";
-import { generateInsertionSortAnimationArray } from "./algorithms/insertionSort";
-import { generateHeapSortAnimationArray } from "./algorithms/heapSort";
 
 import type { AnimationArrayType, SortingAlgorithmType } from "./types";
 
@@ -12,52 +12,52 @@ export const MIN_ANIMATION_SPEED = 0;
 export const MAX_ANIMATION_SPEED = 50;
 
 export function generateRandomNumberFromInterval(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+	return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 export const algorithmOptions = [
-  { label: "Bubble", value: "bubble" },
-  { label: "Quick", value: "quick" },
-  { label: "Merge", value: "merge" },
-  { label: "Insertion", value: "insertion" },
-  { label: "Selection", value: "selection" },
-  { label: "Heap", value: "heap" },
+	{ label: "Bubble", value: "bubble" },
+	{ label: "Quick", value: "quick" },
+	{ label: "Merge", value: "merge" },
+	{ label: "Insertion", value: "insertion" },
+	{ label: "Selection", value: "selection" },
+	{ label: "Heap", value: "heap" },
 ];
 
 export function generateAnimationArray(
-  selectedAlgorithm: SortingAlgorithmType,
-  isSorting: boolean,
-  array: number[],
-  runAnimation: (animations: AnimationArrayType) => void,
-  setPivotIndex: (index: number | null) => void,
+	selectedAlgorithm: SortingAlgorithmType,
+	isSorting: boolean,
+	array: number[],
+	runAnimation: (animations: AnimationArrayType) => void,
+	setPivotIndex: (index: number | null) => void,
 ) {
-  switch (selectedAlgorithm) {
-    case "bubble":
-      generateBubbleSortAnimationArray(isSorting, array, runAnimation);
-      break;
-    case "quick":
-      generateQuickSortAnimationArray(
-        isSorting,
-        array,
-        runAnimation,
-        setPivotIndex,
-      );
-      break;
-    case "merge":
-      generateMergeSortAnimationArray(isSorting, array, runAnimation);
-      break;
-    case "insertion":
-      generateInsertionSortAnimationArray(isSorting, array, runAnimation);
-      break;
-    case "selection":
-      generateSelectionSortAnimationArray(isSorting, array, runAnimation);
-      break;
-    case "heap":
-      generateHeapSortAnimationArray(isSorting, array, runAnimation);
-      break;
-    default:
-      break;
-  }
+	switch (selectedAlgorithm) {
+		case "bubble":
+			generateBubbleSortAnimationArray(isSorting, array, runAnimation);
+			break;
+		case "quick":
+			generateQuickSortAnimationArray(
+				isSorting,
+				array,
+				runAnimation,
+				setPivotIndex,
+			);
+			break;
+		case "merge":
+			generateMergeSortAnimationArray(isSorting, array, runAnimation);
+			break;
+		case "insertion":
+			generateInsertionSortAnimationArray(isSorting, array, runAnimation);
+			break;
+		case "selection":
+			generateSelectionSortAnimationArray(isSorting, array, runAnimation);
+			break;
+		case "heap":
+			generateHeapSortAnimationArray(isSorting, array, runAnimation);
+			break;
+		default:
+			break;
+	}
 }
 
 // Algoruthm info

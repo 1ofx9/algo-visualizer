@@ -7,7 +7,7 @@ Dive into the world of sorting algorithms through interactive visualizations. Wa
 ### Try It!
 Live on [subs-algo-visualizer.vercel.app](https://subs-algo-visualizer.vercel.app/)
 <br>
-Or download Source code directly form [here](https://github.com/1ofx9/algo-visualizer/archive/refs/heads/main.zip).
+Or download Source code directly from [here](https://github.com/1ofx9/algo-visualizer/archive/refs/heads/main.zip).
 
 ### How to use?
 ![homepage](/public/assets/subs-algo-visualizer.png)
@@ -46,4 +46,4 @@ ta da~
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)<br>
 This project is licensed under The MIT License.
 
-its a simple algorithm visualizer thats it :)
+It's a simple algorithm visualizer that's it :)

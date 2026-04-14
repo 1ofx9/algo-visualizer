@@ -52,10 +52,7 @@ export function SortControls() {
 	};
 
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const inputArray = event.target.value
-			.split(",")
-			.map(Number)
-			.slice(0, 35);
+		const inputArray = event.target.value.split(",").map(Number).slice(0, 35);
 		setArrayToSort(inputArray);
 	};
 

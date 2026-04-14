@@ -14,19 +14,14 @@ export default function Home() {
           Algorithm Visualisation
         </h1>
         <h3 className="text-base sm:text-xl md:text-2xl font-medium">
-          Visualize. Learn. Master Search Algorithms.
+          Visualize. Learn. Master Algorithms.
         </h3>
         <div className="flex justify-center items-center space-x-4">
-          {/* <SelectorMenu /> use to add more navs in the future */}
+          {/* <SelectorMenu /> "use this to add selector menu for multiple algorithms" */}
           <Link href="/sorting">
             <Button variant="secondary">Sorting Algorithms</Button>
           </Link>
           <GithubPage />
-        </div>
-        <div className="flex justify-center items-center gap-2 font-medium">
-          <div>
-            <p>Developed by: Team Cario</p>
-          </div>
         </div>
       </div>
     </div>

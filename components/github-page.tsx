@@ -9,8 +9,8 @@ export default function GithubPage() {
 		<div>
 			<Link href={"https://github.com/1ofx9/algo-visualizer"}>
 				<Button>
-					<span className="mr-2 font-semibold">Github</span>
-					<span className="sr-only">github</span>
+					<span className="mr-2 font-semibold">GitHub</span>
+					<span className="sr-only">GitHub</span>
 					<Github />
 				</Button>
 			</Link>

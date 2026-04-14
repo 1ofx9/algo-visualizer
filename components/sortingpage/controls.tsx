@@ -1,6 +1,7 @@
 "use client";
 
 import { Play, RotateCw } from "lucide-react";
+import type * as React from "react";
 import { useSortingAlgorithmContext } from "@/context/visualizer";
 import { algorithmOptions, generateAnimationArray } from "@/lib/config";
 import type { SortingAlgorithmType } from "@/lib/types";
@@ -52,7 +53,13 @@ export function SortControls() {
 	};
 
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const inputArray = event.target.value.split(",").map(Number).slice(0, 35);
+		const inputArray = event.target.value
+			.split(",")
+			.map((value) => value.trim())
+			.filter((value) => value !== "")
+			.map((value) => Number(value))
+			.filter((value) => Number.isFinite(value))
+			.slice(0, 35);
 		setArrayToSort(inputArray);
 	};
 
@@ -62,7 +69,7 @@ export function SortControls() {
 				<div className=" md:w-[500px] min-w-screen-sm">
 					<Input
 						type="text"
-						placeholder="Enter numbers sperated by commas"
+						placeholder="Enter numbers separated by commas"
 						onChange={handleInputChange}
 					/>
 				</div>

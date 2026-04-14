@@ -58,8 +58,8 @@ export default function SortingPage() {
 		return <span>{arrayString}</span>;
 	}
 
-	const arrayString = [`[ ${arrayToSort.join(" ,")} ]`];
-	const unsortedArrayString = [`[ ${unsortedArray.join(" ,")} ]`];
+	const arrayString = `[ ${arrayToSort.join(" ,")} ]`;
+	const unsortedArrayString = `[ ${unsortedArray.join(" ,")} ]`;
 
 	const divRefs = useRef<(RefObject<HTMLDivElement> | null)[]>([]);
 	const [divHeights, setDivHeights] = useState<number[]>([]);

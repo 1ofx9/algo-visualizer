@@ -1,107 +1,110 @@
 "use client";
 
-import { useSortingAlgorithmContext } from "@/context/visualizer";
-import { Slider } from "./slider";
-import { Select } from "./select";
-import { algorithmOptions, generateAnimationArray } from "@/lib/config";
-import { SortingAlgorithmType } from "@/lib/types";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
 import { Play, RotateCw } from "lucide-react";
+import { useSortingAlgorithmContext } from "@/context/visualizer";
+import { algorithmOptions, generateAnimationArray } from "@/lib/config";
+import type { SortingAlgorithmType } from "@/lib/types";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
 } from "../ui/tooltip";
+import { Select } from "./select";
+import { Slider } from "./slider";
 
 export function SortControls() {
-  const {
-    arrayToSort,
-    setArrayToSort,
-    isSorting,
-    setAnimationSpeed,
-    animationSpeed,
-    selectedAlgorithm,
-    setSelectedAlgorithm,
-    requiresReset,
-    resetArrayAndAnimation,
-    runAnimation,
-    setPivotIndex,
-    setRequiresReset,
-  } = useSortingAlgorithmContext();
+	const {
+		arrayToSort,
+		setArrayToSort,
+		isSorting,
+		setAnimationSpeed,
+		animationSpeed,
+		selectedAlgorithm,
+		setSelectedAlgorithm,
+		requiresReset,
+		resetArrayAndAnimation,
+		runAnimation,
+		setPivotIndex,
+		setRequiresReset,
+	} = useSortingAlgorithmContext();
 
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedAlgorithm(e.target.value as SortingAlgorithmType);
-  };
+	const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		setSelectedAlgorithm(e.target.value as SortingAlgorithmType);
+	};
 
-  const handlePlay = () => {
-    if (requiresReset) {
-      resetArrayAndAnimation();
-      return;
-    }
+	const handlePlay = () => {
+		if (requiresReset) {
+			resetArrayAndAnimation();
+			return;
+		}
 
-    generateAnimationArray(
-      selectedAlgorithm,
-      isSorting,
-      arrayToSort,
-      runAnimation,
-      setPivotIndex,
-    );
-    setRequiresReset(true);
-  };
+		generateAnimationArray(
+			selectedAlgorithm,
+			isSorting,
+			arrayToSort,
+			runAnimation,
+			setPivotIndex,
+		);
+		setRequiresReset(true);
+	};
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputArray = event.target.value.split(",").map(Number);
-    setArrayToSort(inputArray);
-  };
+	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const inputArray = event.target.value
+			.split(",")
+			.map(Number)
+			.slice(0, 35);
+		setArrayToSort(inputArray);
+	};
 
-  return (
-    <main>
-      <div className="flex flex-wrap gap-5 m-5 md:flex-row flex-col items-center justify-around">
-        <div className=" md:w-[500px] min-w-screen-sm">
-          <Input
-            type="text"
-            placeholder="Enter numbers sperated by commas"
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="md:w-[250px]">
-          <Slider
-            isDisabled={isSorting}
-            value={animationSpeed}
-            handleChange={(e) => setAnimationSpeed(Number(e.target.value))}
-          />
-        </div>
-        <div className="flex flex-wrap items-center justify-center gap-5">
-          <Button onClick={resetArrayAndAnimation}>
-            Generate Random Array
-          </Button>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant={"secondary"}
-                  size={"icon"}
-                  onClick={handlePlay}
-                >
-                  {requiresReset ? <RotateCw /> : <Play />}
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                {requiresReset ? "Reset" : "Start Sorting"}
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+	return (
+		<main>
+			<div className="flex flex-wrap gap-5 m-5 md:flex-row flex-col items-center justify-around">
+				<div className=" md:w-[500px] min-w-screen-sm">
+					<Input
+						type="text"
+						placeholder="Enter numbers sperated by commas"
+						onChange={handleInputChange}
+					/>
+				</div>
+				<div className="md:w-[250px]">
+					<Slider
+						isDisabled={isSorting}
+						value={animationSpeed}
+						handleChange={(e) => setAnimationSpeed(Number(e.target.value))}
+					/>
+				</div>
+				<div className="flex flex-wrap items-center justify-center gap-5">
+					<Button onClick={resetArrayAndAnimation}>
+						Generate Random Array
+					</Button>
+					<TooltipProvider>
+						<Tooltip>
+							<TooltipTrigger asChild>
+								<Button
+									variant={"secondary"}
+									size={"icon"}
+									onClick={handlePlay}
+								>
+									{requiresReset ? <RotateCw /> : <Play />}
+								</Button>
+							</TooltipTrigger>
+							<TooltipContent>
+								{requiresReset ? "Reset" : "Start Sorting"}
+							</TooltipContent>
+						</Tooltip>
+					</TooltipProvider>
 
-          <Select
-            options={algorithmOptions}
-            defaultValue={selectedAlgorithm}
-            onChange={handleSelectChange}
-            isDisabled={isSorting}
-          />
-        </div>
-      </div>
-    </main>
-  );
+					<Select
+						options={algorithmOptions}
+						defaultValue={selectedAlgorithm}
+						onChange={handleSelectChange}
+						isDisabled={isSorting}
+					/>
+				</div>
+			</div>
+		</main>
+	);
 }

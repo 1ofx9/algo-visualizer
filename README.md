@@ -9,6 +9,8 @@ Live on [subs-algo-visualizer.vercel.app](https://subs-algo-visualizer.vercel.ap
 <br>
 Or download Source code directly from [here](https://github.com/1ofx9/algo-visualizer/archive/refs/heads/main.zip).
 
+[![badge](https://shieldcn.dev/github/1ofx9/Diagonalisation-of-matrix/license.svg)](https://github.com/1ofx9/algo-visualizer)
+
 ### How to use?
 ![homepage](/public/assets/subs-algo-visualizer.png)
 
@@ -41,9 +43,5 @@ After sorting
 ![aftersorting](/public/assets/aftersorting.png)
 
 ta da~
-
-### License
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)<br>
-This project is licensed under The MIT License.
 
 It's a simple algorithm visualizer that's it :)
